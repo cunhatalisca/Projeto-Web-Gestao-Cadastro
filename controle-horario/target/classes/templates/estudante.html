@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Estudante - BES</title>
+<style>
+h2 {
+	text-align: center;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 8px;
+}
+
+.button {
+	display: inline-block;
+	border: 1px solid #ccc;
+	background-color: #f9f9f9;
+	color: #333;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 4px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: #e6e6e6;
+}
+</style>
+</head>
+<body>
+	<h2>Estudantes do curso BES</h2>
+
+	<a href="/cadastrarEstudante" class="button"
+		style="margin-bottom: 20px">Matricular Estudante</a>
+	<a href="/gestao" class="button" style="margin-bottom: 20px">Tela
+		Inicial</a>
+	<table>
+		<thead>
+			<tr>
+				<th>Matricula</th>
+				<th>Nome</th>
+				<th>Email</th>
+				<th>Ano de Egresso</th>
+				<th>Disciplinas</th>
+				<th>Deletar</th>
+				<th>Matricular</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="estudante : ${estudantes}">
+				<td th:text="${estudante.matriculaEstudante}"></td>
+				<td th:text="${estudante.nomeCompletoEstudante}"></td>
+				<td th:text="${estudante.emailEstudante}"></td>
+				<td th:text="${estudante.anoEgressoEstudante}"></td> 
+				<td><span th:each="disciplina, iter : ${estudante.disciplina}">
+						<span th:text="${disciplina.nomeDisciplina}"></span>
+						 <br>
+					</span>
+				</td>
+
+				<td><a
+					th:href="@{/deletar-estudante/{matricula}(matricula=${estudante.matriculaEstudante})}"
+					class="button" style="background: red; color: white">Deletar</a></td>
+				<td><a
+					th:href="@{/matricularEstudante/{matricula}(matricula=${estudante.matriculaEstudante})}"
+					class="button">Matricular Disciplina</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

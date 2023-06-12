@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Disciplina - BES</title>
+<style>
+h2 {
+	text-align: center;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 8px;
+}
+
+.button {
+	display: inline-block;
+	border: 1px solid #ccc;
+	background-color: #f9f9f9;
+	color: #333;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 4px;
+	font-weight: bold; 
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: #e6e6e6;
+}
+</style>
+</head>
+<body>
+	<h2>Disciplinas do curso BES</h2>
+	
+	<a href ="/cadastrarDisciplina" class="button" style="margin-bottom: 20px">Adicionar Disciplina</a>
+	<a href ="/gestao" class="button" style="margin-bottom: 20px">Tela Inicial</a>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Cod_Disciplina</th>
+				<th>Nome</th>
+				<th>Professor</th>
+				<th>Deletar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="disciplina : ${disciplinas}">
+				<td th:text="${disciplina.codDisciplina}"></td>
+				<td th:text="${disciplina.nomeDisciplina}"></td>
+				<td th:text="${disciplina.professor.nomeCompletoProfessor}"></td>
+				
+				<td><a
+					th:href="@{/deletar-disciplina/{codDisciplina}(codDisciplina=${disciplina.codDisciplina})}"
+					class="button" style="background: red; color: white">Deletar</a></td>
+				
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
